@@ -29,31 +29,25 @@ namespace TeamspeakStats
 
         public void Start()
         {
-            this.m_Run = true;
+            DateTime date = DateTime.Now;
+            Console.WriteLine("Récupération des informations ... (" + date.ToString() + ")");
 
-            do
-            {
-                DateTime date = DateTime.Now;
-                Console.WriteLine("Récupération des informations ... (" + date.ToString() + ")");
+            int clients = ClientsGetter.GetClientsConnections();
+            Console.WriteLine(clients + " connectés.");
 
-                int clients = ClientsGetter.GetClientsConnections();
-                Console.WriteLine(clients + " connectés.");
+            Console.WriteLine("Ecriture des informations ...");         
+            this.m_Con.AppendData(clients);
+            this.m_Date.AppendData(date);
 
-                Console.WriteLine("Ecriture des informations ...");         
-                this.m_Con.AppendData(clients);
-                this.m_Date.AppendData(date);
+            Console.WriteLine("Done.\n");
 
-                Console.WriteLine("Done.\n");
-
-                Thread.Sleep(this.m_Time);
-            } while (this.m_Run);
+            this.m_Con.Close();
+            this.m_Date.Close();
         }
 
         public void Stop()
         {
-            this.m_Con.Close();
-            this.m_Date.Close();
-            this.m_Run = false;
+            
         }
     }
 }
