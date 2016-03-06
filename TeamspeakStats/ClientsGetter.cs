@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TeamspeakStats
@@ -21,7 +22,8 @@ namespace TeamspeakStats
             /* Récupération des informations */
             connection.WriteLine("serverinfo");
             string serverinfo = connection.Read();
-            
+            Thread.Sleep(500);
+
             /* Recherche de la valeur dans le string */
             string searchForThis = "virtualserver_clientsonline=";
             int firstCharacter = serverinfo.IndexOf(searchForThis);
