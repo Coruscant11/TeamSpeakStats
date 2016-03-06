@@ -14,8 +14,7 @@ namespace TeamspeakStats
             Console.WriteLine("Tous les combien de secondes voulez-vous enregister les données ?");
 
             string str = Console.ReadLine();
-            short mins = short.Parse(str);
-            mins *= 1000;
+            int mins = int.Parse(str);
 
             TeamspeakStatsRecorder rec = new TeamspeakStatsRecorder("dates.txt", "connections.txt", mins);
 
