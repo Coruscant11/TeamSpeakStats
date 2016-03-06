@@ -13,7 +13,7 @@ namespace TeamspeakStats
         {
             try {
                 /* Connection au serveur TelNet du teamspeak */
-                MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("localhost", 10011);
+                MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("server.osblc.fr", 10011);
                 connection.Read();
 
                 /* Utilisation de l'id 1 */
