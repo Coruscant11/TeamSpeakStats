@@ -11,27 +11,39 @@ namespace TeamspeakStats
     {
         public static int GetClientsConnections()
         {
-            /* Connection au serveur TelNet du teamspeak */
-            MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("server.osblc.fr", 10011);
-            connection.Read();
+            try {
+                /* Connection au serveur TelNet du teamspeak */
+                MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("localhost", 10011);
+                connection.Read();
 
-            /* Utilisation de l'id 1 */
-            connection.WriteLine("use 1");
-            connection.Read();
+                /* Utilisation de l'id 1 */
+                connection.WriteLine("use 1");
+                connection.Read();
 
-            /* Récupération des informations */
-            connection.WriteLine("serverinfo");
-            string serverinfo = connection.Read();
-            Thread.Sleep(500);
+                /* Récupération des informations */
+                connection.WriteLine("serverinfo");
+                string serverinfo = connection.Read();
+                Thread.Sleep(500);
 
-            /* Recherche de la valeur dans le string */
-            string searchForThis = "virtualserver_clientsonline=";
-            int firstCharacter = serverinfo.IndexOf(searchForThis);
-            string s = serverinfo.Substring(firstCharacter + searchForThis.Length, 2);
+                /* Recherche de la valeur dans le string */
+                string searchForThis = "virtualserver_clientsonline=";
+                int firstCharacter = serverinfo.IndexOf(searchForThis);
+                string s = serverinfo.Substring(firstCharacter + searchForThis.Length, 2);
 
-            connection.WriteLine("logout"); // Déconnexion
+                connection.WriteLine("logout"); // Déconnexion
 
-            return int.Parse(s);
+                int clients = int.Parse(s); // Conversion de la chaîne de caractère en int
+
+                /* TMTC matéo */
+                if (clients >= 3)
+                    return clients - 3;
+                else return clients;
+
+            } catch(Exception e) {
+
+                Console.WriteLine("Erreur lors de la récupération du nombre de clients. 0 Clients retournés au fichier.");
+                return 0;
+            }
         }
     }
 }
