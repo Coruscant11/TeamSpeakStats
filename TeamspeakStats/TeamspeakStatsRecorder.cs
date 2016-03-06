@@ -13,8 +13,7 @@ namespace TeamspeakStats
         private string m_DateFile;
         private string m_ConnectFile;
         private int m_Time;
-
-        private Thread m_RecordThread;
+        private bool run;
 
         public TeamspeakStatsRecorder(string date_file_location, string connects_file_location, int seconds)
         {
@@ -25,15 +24,20 @@ namespace TeamspeakStats
 
         public void StartRecord()
         {
-            this.m_RT = new RecordThread(this.m_Time, this.m_ConnectFile, this.m_DateFile);
-            this.m_RecordThread = new Thread(new ThreadStart(this.m_RT.Start));
-            this.m_RecordThread.Start();
+            run = true;
+            do
+            {
+                this.m_RT = new RecordThread(this.m_Time, this.m_ConnectFile, this.m_DateFile);
+                this.m_RT.Start();
+                Thread.Sleep(this.m_Time);
+                this.m_RT.Stop();
+                this.m_RT = null;
+            } while (run);
         }
 
         public void StopRecord()
         {
-            this.m_RT.Stop();
-            this.m_RecordThread.Abort();
+            this.run = false;
         }
     }
 }
