@@ -20,18 +20,8 @@ namespace TeamspeakStats
             TeamspeakStatsRecorder rec = new TeamspeakStatsRecorder("dates.txt", "connections.txt", mins);
 
             Console.WriteLine("Lancement du programme.");
-            Console.WriteLine("Ecrivez 'stop' pour arrêter le programme.");
 
             rec.StartRecord();
-
-            do
-            {
-                if (Console.ReadLine().Equals("stop"))
-                {
-                    rec.StopRecord();
-                    break;
-                }
-            } while (true);
         }
     }
 }
