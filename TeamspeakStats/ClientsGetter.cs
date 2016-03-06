@@ -13,7 +13,7 @@ namespace TeamspeakStats
         {
             try {
                 /* Connection au serveur TelNet du teamspeak */
-                MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("localhost", 10011);
+                MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("server.osblc.fr", 10011);
                 connection.Read();
 
                 /* Utilisation de l'id 1 */
@@ -33,6 +33,11 @@ namespace TeamspeakStats
                 connection.WriteLine("logout"); // Déconnexion
 
                 int clients = int.Parse(s); // Conversion de la chaîne de caractère en int
+
+                /* Destruction des variables */
+                connection = null;
+                serverinfo = null;
+                s = null;
 
                 /* TMTC matéo */
                 if (clients >= 3)

@@ -9,12 +9,17 @@ namespace TeamspeakStats
 {
     abstract class FileManager
     {
-        protected TextWriter m_Writer;
-        protected FileStream m_FileStream;
         protected string m_File_Location;
 
-        public abstract void Initialize(string file);
-        public abstract void AppendData(string data);
+        public void Initialize(string file)
+        {
+            this.m_File_Location = file;
+        }
+
+        public void AppendData(string data)
+        {
+            File.AppendText(data);
+        }
         public abstract void Close();
     }
 }
