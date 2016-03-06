@@ -18,7 +18,10 @@ namespace TeamspeakStats
 
         public void AppendData(string data)
         {
-            File.AppendText(data);
+            StreamWriter sw = File.AppendText(this.m_File_Location);
+            sw.WriteLine(data);
+            sw.Flush();
+            sw.Close();
         }
         public abstract void Close();
     }

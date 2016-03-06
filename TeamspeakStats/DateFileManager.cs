@@ -13,7 +13,10 @@ namespace TeamspeakStats
         public void AppendData(DateTime date)
         {
             string dateText = String.Format("{0:dd/MM/yyyy HH:mm:ss}", date);
-            File.AppendText(dateText);
+            StreamWriter sw = File.AppendText(this.m_File_Location);
+            sw.WriteLine(dateText);
+            sw.Flush();
+            sw.Close();
         }
 
         /* Ferme les flux */

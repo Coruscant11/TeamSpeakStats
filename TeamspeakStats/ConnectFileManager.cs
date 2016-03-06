@@ -11,7 +11,10 @@ namespace TeamspeakStats
     {
         public void AppendData(int clients)
         {
-            File.AppendText(clients.ToString());
+            StreamWriter sw = File.AppendText(this.m_File_Location);
+            sw.WriteLine(clients);
+            sw.Flush();
+            sw.Close();
         }
 
         public override void Close()
