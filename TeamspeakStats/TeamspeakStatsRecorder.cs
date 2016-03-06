@@ -29,7 +29,9 @@ namespace TeamspeakStats
             {
                 this.m_RT = new RecordThread(this.m_Time, this.m_ConnectFile, this.m_DateFile);
                 this.m_RT.Start();
+
                 Thread.Sleep(this.m_Time);
+
                 this.m_RT.Stop();
                 this.m_RT = null;
             } while (run);
