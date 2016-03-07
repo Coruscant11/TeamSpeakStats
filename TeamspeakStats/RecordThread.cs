@@ -27,7 +27,7 @@ namespace TeamspeakStats
         public void Start()
         {
             DateTime date = DateTime.Now;
-            Console.WriteLine("Récupération des informations ... (" + date.ToString() + ")");
+            Console.WriteLine("------------------------------------------------\nRécupération des informations ... (" + date.ToString() + ")");
 
             int clients = ClientsGetter.GetClientsConnections();
             Console.WriteLine(clients + " connectés.");
@@ -36,7 +36,7 @@ namespace TeamspeakStats
             this.m_Con.AppendData(clients);
             this.m_Date.AppendData(date);
 
-            Console.WriteLine("Done.\n");
+            Console.WriteLine("Done.\n------------------------------------------------\n\n");
 
             this.m_Con.Close();
             this.m_Date.Close();
@@ -44,7 +44,8 @@ namespace TeamspeakStats
 
         public void Stop()
         {
-            
+            this.m_Con = null;
+            this.m_Date = null;
         }
     }
 }
