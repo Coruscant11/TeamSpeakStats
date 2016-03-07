@@ -16,10 +16,17 @@ namespace TeamspeakStats
             Console.ReadLine();
 
             CheckDirectorys();
-            int mins = int.Parse(File.ReadAllText("config.txt"));
+            string url;
+            int mins;
+
+            string[] linesConfig = File.ReadAllLines("config.txt");
+
+            mins = int.Parse(linesConfig[0]);
+            url = linesConfig[1];
+
             mins *= 1000;
 
-            TeamspeakStatsRecorder rec = new TeamspeakStatsRecorder("datas/dates.txt", "datas/connections.txt", mins);
+            TeamspeakStatsRecorder rec = new TeamspeakStatsRecorder(url, "datas/dates.txt", "datas/connections.txt", mins);
 
             Console.WriteLine("Lancement du programme.");
 
