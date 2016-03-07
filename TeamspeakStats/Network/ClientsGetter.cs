@@ -23,14 +23,16 @@ namespace TeamspeakStats
             } catch(Exception e) {
 
                 Console.WriteLine("Erreur lors de la récupération du nombre de clients.");
-                Console.WriteLine("Nous allons retenter dans 5 secondes.");
+                Console.WriteLine("Nous allons retenter dans 5 secondes.\n");
+                Thread.Sleep(5000);
+
                 try {
                     int clients = GetClients(url);
                     return clients;
                 } catch {
-                    Console.WriteLine("La récupération est bel et bien impossible.\n0Clients connectés retournés au fichier.");
-                    Console.WriteLine("Voici l'erreur : ");
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("La récupération est bel et bien impossible.\n0 clients connectés retournés au fichier.");
+                    Console.WriteLine("Voici l'erreur : \n");
+                    Console.Error.WriteLine(e.Message + "\n");
                     return 0;
                 }
             }
