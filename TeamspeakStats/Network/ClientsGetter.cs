@@ -9,11 +9,11 @@ namespace TeamspeakStats
 {
     class ClientsGetter
     {
-        public static int GetClientsConnections()
+        public static int GetClientsConnections(string url)
         {
             try {
 
-                int clients = GetClients();
+                int clients = GetClients(url);
 
                 /* TMTC matéo */
                 if (clients >= 3)
@@ -25,7 +25,7 @@ namespace TeamspeakStats
                 Console.WriteLine("Erreur lors de la récupération du nombre de clients.");
                 Console.WriteLine("Nous allons retenter dans 5 secondes.");
                 try {
-                    int clients = GetClients();
+                    int clients = GetClients(url);
                     return clients;
                 } catch {
                     Console.WriteLine("La récupération est bel et bien impossible.\n0Clients connectés retournés au fichier.");
@@ -36,10 +36,10 @@ namespace TeamspeakStats
             }
         }
 
-        private static int GetClients()
+        private static int GetClients(string url)
         {
             /* Connection au serveur TelNet du teamspeak */
-            MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection("server.osblc.fr", 10011);
+            MinimalisticTelnet.TelnetConnection connection = new MinimalisticTelnet.TelnetConnection(url, 10011);
             connection.Read();
 
             /* Utilisation de l'id 1 */
