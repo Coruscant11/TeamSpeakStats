@@ -12,7 +12,7 @@ namespace TeamspeakStats
         public static int GetClientsConnections(string url)
         {
             try {
-
+                 
                 int clients = GetClients(url);
 
                 /* TMTC matéo */
