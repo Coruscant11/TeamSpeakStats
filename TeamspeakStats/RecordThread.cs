@@ -13,8 +13,6 @@ namespace TeamspeakStats
         private DateFileManager m_Date;
         private int m_Time;
 
-        private bool m_Run;
-
         public RecordThread(int time, string connect_file_location, string date_file_location)
         {
             this.m_Con = new ConnectFileManager();
