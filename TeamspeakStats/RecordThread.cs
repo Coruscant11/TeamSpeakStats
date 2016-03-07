@@ -12,8 +12,9 @@ namespace TeamspeakStats
         private ConnectFileManager m_Con;
         private DateFileManager m_Date;
         private int m_Time;
+        private string m_Url;
 
-        public RecordThread(int time, string connect_file_location, string date_file_location)
+        public RecordThread(int time, string connect_file_location, string date_file_location, string url)
         {
             this.m_Con = new ConnectFileManager();
             this.m_Con.Initialize(connect_file_location);
@@ -22,6 +23,7 @@ namespace TeamspeakStats
             this.m_Date.Initialize(date_file_location);
 
             this.m_Time = time;
+            this.m_Url = url;
         }
 
         public void Start()
@@ -29,7 +31,7 @@ namespace TeamspeakStats
             DateTime date = DateTime.Now;
             Console.WriteLine("------------------------------------------------\nRécupération des informations ... (" + date.ToString() + ")");
 
-            int clients = ClientsGetter.GetClientsConnections();
+            int clients = ClientsGetter.GetClientsConnections(this.m_Url);
             Console.WriteLine(clients + " connectés.");
 
             Console.WriteLine("Ecriture des informations ...");         
