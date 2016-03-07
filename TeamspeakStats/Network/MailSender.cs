@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using Outlook = Microsoft.Office.Interop.Outlook;
+
 namespace TeamspeakStats
 {
     class MailSender
