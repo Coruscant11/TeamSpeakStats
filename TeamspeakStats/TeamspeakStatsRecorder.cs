@@ -10,8 +10,11 @@ namespace TeamspeakStats
     class TeamspeakStatsRecorder
     {
         private RecordThread m_RT;
+        private Thread m_RecordThread;
+
         private string m_DateFile;
         private string m_ConnectFile;
+
         private int m_Time;
         private bool run;
 
@@ -20,9 +23,15 @@ namespace TeamspeakStats
             this.m_Time = seconds;
             this.m_DateFile = date_file_location;
             this.m_ConnectFile = connects_file_location;
+            this.m_RecordThread = new Thread(new ThreadStart(Run));
         }
 
         public void StartRecord()
+        {
+            this.m_RecordThread.Start();
+        }
+
+        public void Run()
         {
             run = true;
             do
@@ -36,10 +45,10 @@ namespace TeamspeakStats
                 this.m_RT = null;
             } while (run);
         }
-
         public void StopRecord()
         {
             this.run = false;
+            this.m_RecordThread.Abort();
         }
     }
 }

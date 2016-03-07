@@ -15,6 +15,7 @@ namespace TeamspeakStats
 
             string str = Console.ReadLine();
             int mins = int.Parse(str);
+            mins *= 1000;
 
             TeamspeakStatsRecorder rec = new TeamspeakStatsRecorder("dates.txt", "connections.txt", mins);
 
