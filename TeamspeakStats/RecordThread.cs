@@ -22,7 +22,6 @@ namespace TeamspeakStats
             this.m_Date.Initialize(date_file_location);
 
             this.m_Time = time;
-            this.m_Run = false;
         }
 
         public void Start()
