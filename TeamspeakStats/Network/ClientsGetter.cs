@@ -29,10 +29,12 @@ namespace TeamspeakStats
                 try {
                     int clients = GetClients(url);
                     return clients;
-                } catch {
+                } catch (Exception ex) {
                     Console.WriteLine("La récupération est bel et bien impossible.\n0 clients connectés retournés au fichier.");
                     Console.WriteLine("Voici l'erreur : \n");
                     Console.Error.WriteLine(e.Message + "\n");
+                    Console.WriteLine("Envois de l'email...");
+                    MailSender.SendMail("mateox06@hotmail.fr", ex.Message, DateTime.Now.ToString());
                     return 0;
                 }
             }
