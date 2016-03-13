@@ -10,19 +10,21 @@ namespace TeamspeakStats
 {
     class MailSender
     {
-        public static void SendMail(string from, string destination, string text)
+        public static void SendMail(string destination, string error, string date)
         {
-            using (SmtpClient smtpClient = new SmtpClient("smtp.live.com"))
+            var client = new SmtpClient("smtp.gmail.com", 587)
             {
-                MailMessage message = new MailMessage();
-
-                message.From = new MailAddress("mabiteosblc@hotmail.com", "Coruscant11");
-                message.To.Add("mateox06@hotmail.fr");
-                message.Subject = "Subject email";
-                message.Body = "Content email";
-                message.IsBodyHtml = false;
-
-                smtpClient.SendAsync(message, null);
+                Credentials = new NetworkCredential("teamspeakstats@gmail.com", "mateolepddu06"),
+                EnableSsl = true
+            };
+            try
+            {
+                client.Send("teamspeakstats@gmail.com", destination, "Notification d'erreur du BOT", "Une impossibilité d'envoi a été constatée lors d'une tentative de récupération des données du serveur TeamSpeak le " + date + ".\n" + "Mais que fait l'administration ?\n\nVoici l'erreur : \n" + error);
+                Console.WriteLine("Envoyé");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }
